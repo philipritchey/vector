@@ -1,2 +1,5 @@
 main
 a.out
+*.gcov
+*.gcda
+*.gcno
