@@ -71,6 +71,9 @@ int& back(int A[], size_t size) {
 }
 
 int at(const int A[], size_t size, size_t index) {
+    if (!A) {
+        throw std::invalid_argument("cannot access null array");
+    }
     if (index >= size) {
         throw std::out_of_range("refuse to access out of bounds");
     }
@@ -588,6 +591,16 @@ void test_at() {
     // ACCESS CONST ARRAY
     const int constA[3]{0,121,0};
     assert(at(constA, 3, 1) == 121);
+
+    const int* constB = nullptr;
+    try {
+        at(constB, 1, 0);
+        assert(!"at of null const array");
+    } catch (const std::invalid_argument& err) {
+        assert(true);
+    } catch (...) {
+        assert(!"at of null const array threw wrong kind of exception");
+    }
 
     delete[] A;
 }

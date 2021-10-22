@@ -6,7 +6,8 @@
 1. ~~at(index)~~
 1. ~~migrate from stack to heap~~
 1. ~~resize~~
-1. refactor tests
+1. ~~refactor tests~~
+1. move vector methods to their own file(s)
 1. encapsulate (refactor)
 1. push_front(value)
 1. insert(index, value)
