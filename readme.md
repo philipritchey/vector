@@ -1,5 +1,7 @@
 # README
 
+A `vector` is a sequence container that encapsulates dynamic size arrays.  The storage of the vector is handled automatically, being expanded as needed.  Access (`at`, `front`, `back`) is O(1).  Insert/remove at the back (`push_back`, `pop_back`) is amortized O(1), otherwise `insert`/`remove` is O(n).
+
 ## run
 press `Ctrl` `Enter` or click ![the Run button](assets/run.png) to build and run correctness tests.
 

@@ -22,11 +22,18 @@
 1. [X] make dynamic (auto-resize)
 1. [X] push_front(value)
 1. [X] insert(index, value)
-1. [ ] readme
+1. [X] readme
 
 ## wednesday 27 oct
 1. [ ] pop_front()
 1. [ ] erase(index)
 1. [ ] change struct to class (refactor)
+
+
+## friday 29 oct
+1. [ ] copy constructor (ro3)
+1. [ ] copy assignment operator (ro3)
+1. [ ] destructor (ro3)
 1. [ ] iterator
 1. [ ] template (refactor)
+1. [ ] shrink_to_fit
