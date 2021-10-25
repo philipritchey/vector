@@ -22,6 +22,7 @@
 1. [X] make dynamic (auto-resize)
 1. [X] push_front(value)
 1. [X] insert(index, value)
+1. [ ] readme
 
 ## wednesday 27 oct
 1. [ ] pop_front()
