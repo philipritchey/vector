@@ -1,25 +1,31 @@
 # todo
+
 ## monday 18 oct
-1. ~~push_back(value)~~
-1. ~~pop_back()~~
-1. ~~front()~~
-1. ~~back()~~
+1. [X] push_back(value)
+1. [X] pop_back()
+1. [X] front()
+1. [X] back()
+
 ## wednesday 20 oct
-1. ~~at(index)~~
-1. ~~migrate from stack to heap~~
-1. ~~resize~~
-1. ~~refactor tests~~
+1. [X] at(index)
+1. [X] migrate from stack to heap
+1. [X] resize
+1. [X] refactor tests
+
 ## friday 22 oct
-1. ~~code coverage~~
-1. ~~move vector methods to their own file(s)~~
-1. ~~encapsulate (refactor)~~
-1. ~~Makefile~~
+1. [X] code coverage
+1. [X] move vector methods to their own file(s)
+1. [X] encapsulate (refactor)
+1. [X] Makefile
+
 ## monday 25 oct
-1. ~~make dynamic (auto-resize)~~
-1. ~~push_front(value)~~
-1. ~~insert(index, value)~~
-1. pop_front()
-1. erase(index)
-1. change struct to class (refactor)
-1. iterator
-1. template (refactor)
+1. [X] make dynamic (auto-resize)
+1. [X] push_front(value)
+1. [X] insert(index, value)
+
+## wednesday 27 oct
+1. [ ] pop_front()
+1. [ ] erase(index)
+1. [ ] change struct to class (refactor)
+1. [ ] iterator
+1. [ ] template (refactor)
