@@ -15,9 +15,9 @@
 1. ~~encapsulate (refactor)~~
 1. ~~Makefile~~
 ## monday 25 oct
-1. make dynamic (auto-resize)
-1. push_front(value)
-1. insert(index, value)
+1. ~~make dynamic (auto-resize)~~
+1. ~~push_front(value)~~
+1. ~~insert(index, value)~~
 1. pop_front()
 1. erase(index)
 1. change struct to class (refactor)

@@ -35,15 +35,15 @@ void test_push_back() {
         assert(v.A == nullptr);
         assert(v.capacity == 0);
         assert(v.size == 0);
-        // expect push_back to fail
-        assert(!v.push_back(1));
+        // expect push_back to succeed
+        v.push_back(1);
         // postconditions
-        //   A is null
-        //   capacity is 0
-        //   size is 0
-        assert(v.A == nullptr);
-        assert(v.capacity == 0);
-        assert(v.size== 0);
+        //   A is not null
+        //   capacity is 1
+        //   size is 1
+        assert(v.A != nullptr);
+        assert(v.capacity == 1);
+        assert(v.size== 1);
     }
 
     // INSERT INTO NULL ARRAY (LIE ABOUT CAPACITY)
@@ -56,15 +56,15 @@ void test_push_back() {
         assert(v.A == nullptr);
         assert(v.capacity == 1);
         assert(v.size == 0);
-        // expect push_back to fail
-        assert(!v.push_back(1));
+        // expect push_back to succeed
+        v.push_back(1);
         // postconditions
-        //   A is null
-        //   capacity is 1 (lie)
-        //   size is 0
-        assert(v.A == nullptr);
+        //   A is not null
+        //   capacity is 1
+        //   size is 1
+        assert(v.A != nullptr);
         assert(v.capacity == 1);
-        assert(v.size == 0);
+        assert(v.size == 1);
     }
 
     // INSERT VALUE INTO ARRAY WITH CAPACITY 0
@@ -77,15 +77,16 @@ void test_push_back() {
         assert(v.capacity == 0);
         assert(v.size == 0);
         assert(v.A[0] == 1);
-        // expect push_back to fail
-        assert(!v.push_back(-1));
+        // expect push_back to succeed
+        v.push_back(-1);
         // postconditions
-        //   capacity is 0
-        //   size is 0
-        //   A at index 0 is 1
-        assert(v.capacity == 0);
-        assert(v.size== 0);
-        assert(v.A[0] == 1);
+        //   capacity is 1
+        //   size is 1
+        //   A at index 0 is -1
+        //   no memory leaks
+        assert(v.capacity == 1);
+        assert(v.size == 1);
+        assert(v.A[0] == -1);
 
         delete[] v.A;
     }
@@ -102,7 +103,7 @@ void test_push_back() {
         assert(v.A[0] != 1);
         // expect push_back to succeed
         size_t old_capacity = v.capacity;
-        assert(v.push_back(1));
+        v.push_back(1);
         // postconditions
         //   capacity did not change
         //   size is 1
@@ -126,7 +127,7 @@ void test_push_back() {
             assert(v.capacity == 10);
             assert(v.A[i] == 0);
             // expect push_back to succeed
-            assert(v.push_back(i));
+            v.push_back(i);
             // postconditions
             //   size is i+1
             //   capacity is 10
@@ -136,29 +137,275 @@ void test_push_back() {
             assert(v.A[i] == i);
         }
 
+        for (int i = 0; i < 10; i++) {
+            assert(v.A[i] == i);
+        }
+
         delete[] v.A;
     }
 
-    // ATTEMPT TO INSERT INTO A FULL ARRAY
+    // INSERT INTO A FULL ARRAY
     {
-        vector v{2,2,new int[2]{10,10}};
+        vector v{2,2,new int[2]{10,11}};
         // preconditions
         //   capacity > 0
         //   size equals capacity
-        //   capacity is 10
         assert(v.size == v.capacity);
         assert(v.capacity > 0);
-        // expect push_back to fail
+        // expect push_back to succeed
         size_t old_capacity = v.capacity;
-        assert(!v.push_back(0));
+        v.push_back(1);
         // postconditions
-        //   size equals capacity
-        //   capacity did not change
-        assert(v.size == v.capacity);
-        assert(v.capacity == old_capacity);
+        //   size equals old_capacity + 1 (old_size + 1)
+        //   capacity doubles
+        assert(v.size == old_capacity + 1);
+        assert(v.capacity == 2*old_capacity);
+
+        assert(v.A[0] == 10);
+        assert(v.A[1] == 11);
+        assert(v.A[2] == 1);
 
         delete[] v.A;
     }
+}
+
+void test_push_front() {
+
+    // INSERT INTO NULL ARRAY
+    {
+        vector v;
+        // preconditions
+        //   A is null
+        //   capacity is 0
+        //   size is 0
+        assert(v.A == nullptr);
+        assert(v.capacity == 0);
+        assert(v.size == 0);
+        // expect push_front to succeed
+        v.push_front(1);
+        // postconditions
+        //   A is not null
+        //   capacity is 1
+        //   size is 1
+        assert(v.A != nullptr);
+        assert(v.capacity == 1);
+        assert(v.size== 1);
+    }
+
+    // INSERT INTO NULL ARRAY (LIE ABOUT CAPACITY)
+    {
+        vector v{1,0,nullptr};
+        // preconditions
+        //   A is null
+        //   capacity is 1 (lie)
+        //   size is 0
+        assert(v.A == nullptr);
+        assert(v.capacity == 1);
+        assert(v.size == 0);
+        // expect push_front to succeed
+        v.push_front(1);
+        // postconditions
+        //   A is not null
+        //   capacity is 1
+        //   size is 1
+        assert(v.A != nullptr);
+        assert(v.capacity == 1);
+        assert(v.size == 1);
+    }
+
+    // INSERT VALUE INTO ARRAY WITH CAPACITY 0
+    {
+        vector v{0,0,new int[1]{1}};
+        // preconditions
+        //   capacity is 0 (lie)
+        //   size is 0
+        //   A at index 0 is 1
+        assert(v.capacity == 0);
+        assert(v.size == 0);
+        assert(v.A[0] == 1);
+        // expect push_front to succeed
+        v.push_front(-1);
+        // postconditions
+        //   capacity is 1
+        //   size is 1
+        //   A at index 0 is -1
+        //   no memory leaks
+        assert(v.capacity == 1);
+        assert(v.size == 1);
+        assert(v.A[0] == -1);
+
+        delete[] v.A;
+    }
+
+    // INSERT VALUE INTO EMPTY ARRAY
+    {
+        vector v{10, 0, new int[10]{2}};
+        // preconditions
+        //   capacity > 0
+        //   size is 0
+        //   A at 0 is not 1
+        assert(v.capacity > 0);
+        assert(v.size == 0);
+        assert(v.A[0] != 1);
+        // expect push_front to succeed
+        size_t old_capacity = v.capacity;
+        v.push_front(1);
+        // postconditions
+        //   capacity did not change
+        //   size is 1
+        //   A at index 0 is 1
+        assert(v.capacity == old_capacity);
+        assert(v.size == 1);
+        assert(v.A[0] == 1);
+
+        delete[] v.A;
+    }
+
+    // FILL UP THE ARRAY
+    {
+        vector v{10,0,new int[10]{}};
+        for (int i = 0; i < 10; i++) {
+            // preconditions
+            //   size is i
+            //   capacity is 10
+            //   A at i is 0
+            assert(v.size == unsigned(i));
+            assert(v.capacity == 10);
+            if (i == 0) {
+                assert(v.A[0] == 0);
+            } else {
+                assert(v.A[0] == i-1);
+            }
+            // expect push_front to succeed
+            v.push_front(i);
+            // postconditions
+            //   size is i+1
+            //   capacity is 10
+            //   A at index 0 is i
+            assert(v.size == unsigned(i+1));
+            assert(v.capacity == 10);
+            assert(v.A[0] == i);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            assert(v.A[i] == 9-i);
+        }
+
+        delete[] v.A;
+    }
+
+    // INSERT INTO A FULL ARRAY
+    {
+        vector v{2,2,new int[2]{10,11}};
+        // preconditions
+        //   capacity > 0
+        //   size equals capacity
+        assert(v.size == v.capacity);
+        assert(v.capacity > 0);
+        // expect push_front to succeed
+        size_t old_capacity = v.capacity;
+        v.push_front(1);
+        // postconditions
+        //   size equals old_capacity + 1 (old_size + 1)
+        //   capacity doubles
+        //   A at 0 is 1
+        assert(v.size == old_capacity + 1);
+        assert(v.capacity == 2*old_capacity);
+
+        assert(v.A[0] == 1);
+        assert(v.A[1] == 10);
+        assert(v.A[2] == 11);
+
+        delete[] v.A;
+    }
+}
+
+void test_insert() {
+    vector v;
+
+    assert(v.capacity == 0);
+    assert(v.size == 0);
+
+    // insert at not 0 into empty (possibly null)
+    bool threw_expected_exception = false;
+    try {
+        v.insert(1, 1);
+    } catch(const std::out_of_range& err) {
+        threw_expected_exception = true;
+    }
+    assert(threw_expected_exception);
+    assert(v.capacity == 0);
+    assert(v.size == 0);
+
+    // insert at 0 into empty
+    bool threw_exception = false;
+    try {
+        v.insert(0, 1);
+    } catch(...) {
+        threw_exception = true;
+    }
+    assert(!threw_exception);
+    assert(v.capacity == 1);
+    assert(v.size == 1);
+    assert(v.A[0] == 1);
+
+    // insert at front
+    threw_exception = false;
+    try {
+        v.insert(0, 2);
+    } catch(...) {
+        threw_exception = true;
+    }
+    assert(!threw_exception);
+    assert(v.capacity == 2);
+    assert(v.size == 2);
+    assert(v.A[0] == 2);
+    assert(v.A[1] == 1);
+
+    // insert at back
+    threw_exception = false;
+    try {
+        v.insert(2, 3);
+    } catch(...) {
+        threw_exception = true;
+    }
+    assert(!threw_exception);
+    assert(v.capacity == 4);
+    assert(v.size == 3);
+    assert(v.A[0] == 2);
+    assert(v.A[1] == 1);
+    assert(v.A[2] == 3);
+
+    // insert at middle
+    threw_exception = false;
+    try {
+        v.insert(1, 4);
+    } catch(...) {
+        threw_exception = true;
+    }
+    assert(!threw_exception);
+    assert(v.capacity == 4);
+    assert(v.size == 4);
+    assert(v.A[0] == 2);
+    assert(v.A[1] == 4);
+    assert(v.A[2] == 1);
+    assert(v.A[3] == 3);
+
+    // insert out of bounds in non empty array
+    threw_expected_exception = false;
+    try {
+        v.insert(5, 5);
+    } catch(const std::out_of_range& err) {
+        threw_expected_exception = true;
+    }
+    assert(threw_expected_exception);
+    assert(v.capacity == 4);
+    assert(v.size == 4);
+    assert(v.A[0] == 2);
+    assert(v.A[1] == 4);
+    assert(v.A[2] == 1);
+    assert(v.A[3] == 3);
+
 }
 
 void test_pop_back() {
@@ -837,6 +1084,8 @@ int main() {
 
     test_construct();
     test_push_back();
+    test_push_front();
+    test_insert();
     test_pop_back();
     test_front();
     test_back();

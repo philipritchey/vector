@@ -3,16 +3,55 @@
 
 // TODO: define vector methods here
 
-bool vector::push_back(int value) {
-    if (capacity == 0 || !A) {
-        return false;
-    }
-    if (size >= capacity) {
-        return false;
+void vector::push_back(int value) {
+    if (!A || capacity == 0) {
+        delete[] A;
+        A = new int[1]{};
+        capacity = 1;
+        size = 0;
+    } else if (size >= capacity) {
+        resize();
     }
     A[size] = value;
     size++;
-    return true;
+}
+
+void vector::push_front(int value) {
+    if (!A || capacity == 0) {
+        delete[] A;
+        A = new int[1]{};
+        capacity = 1;
+        size = 0;
+    } else if (size >= capacity) {
+        resize();
+    }
+    // shift
+    for (size_t index = size; index > 0; index--) {
+        A[index] = A[index - 1];
+    }
+    // assign
+    A[0] = value;
+    size++;
+}
+
+void vector::insert(size_t index, int value) {
+    if (index > size) {
+        throw std::out_of_range("refuse to access out of bounds");
+    }
+    if (index == 0) {
+        push_front(value);
+    } else if (index == size) {
+        push_back(value);
+    } else {
+        // middle
+        // shift
+        for (size_t i = size; i > index; i--) {
+            A[i] = A[i - 1];
+        }
+        // assign
+        A[index] = value;
+        size++;
+    }
 }
 
 int vector::pop_back() {

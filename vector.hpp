@@ -12,7 +12,9 @@ struct vector {
     int* A = nullptr;    
 
     // methods
-    bool push_back(int value);
+    void push_back(int value);
+    void push_front(int value);
+    void insert(size_t index, int value);
     int pop_back();
     int front() const;
     int& front();
