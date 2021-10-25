@@ -44,6 +44,8 @@ void test_push_back() {
         assert(v.A != nullptr);
         assert(v.capacity == 1);
         assert(v.size== 1);
+
+        delete[] v.A;
     }
 
     // INSERT INTO NULL ARRAY (LIE ABOUT CAPACITY)
@@ -65,6 +67,8 @@ void test_push_back() {
         assert(v.A != nullptr);
         assert(v.capacity == 1);
         assert(v.size == 1);
+
+        delete[] v.A;
     }
 
     // INSERT VALUE INTO ARRAY WITH CAPACITY 0
@@ -190,6 +194,8 @@ void test_push_front() {
         assert(v.A != nullptr);
         assert(v.capacity == 1);
         assert(v.size== 1);
+
+        delete[] v.A;
     }
 
     // INSERT INTO NULL ARRAY (LIE ABOUT CAPACITY)
@@ -211,6 +217,8 @@ void test_push_front() {
         assert(v.A != nullptr);
         assert(v.capacity == 1);
         assert(v.size == 1);
+
+        delete[] v.A;
     }
 
     // INSERT VALUE INTO ARRAY WITH CAPACITY 0
@@ -406,6 +414,7 @@ void test_insert() {
     assert(v.A[2] == 1);
     assert(v.A[3] == 3);
 
+    delete[] v.A;
 }
 
 void test_pop_back() {
@@ -553,6 +562,8 @@ void test_pop_back() {
         assert(v.size== 0);
         assert(v.capacity == old_capacity);
         assert(v.A == old_A);
+
+        delete[] v.A;
     }
 
 }
