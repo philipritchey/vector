@@ -34,7 +34,7 @@
 1. [X] copy constructor (ro3)
 1. [X] copy assignment operator (ro3)
 1. [X] destructor (ro3)
-1. [ ] refactor tests to use constructors
+1. [X] refactor tests to use constructors
 
 ## friday 5 nov
 1. [ ] integration testing
