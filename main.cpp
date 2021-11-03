@@ -22,6 +22,16 @@ void test_construct() {
             assert(v.data()[index] == 0); 
         }
     }
+
+    {
+        vector v({1,2,3,4,5});
+        assert(v.capacity == 5);
+        assert(v.size == 5);
+        assert(v.A != nullptr);
+        for (size_t index = 0; index < 5; index++) {
+            assert(v.data()[index] == int(index+1)); 
+        }
+    }
 }
 
 void test_push_back() {
