@@ -590,18 +590,13 @@ void test_pop_back() {
 }
 
 void test_front() {
-    /* OBSOLETE
     // ATTEMPT TO GET FRONT OF NULL ARRAY
     {
-        vector v{10, 1, nullptr};
+        vector v;
         // pre
         //   A is nullptr
-        //   capacity is > 0 (lie)
-        //   size is > 0 (lie)
         // expect front of null to throw invalid_argument exception
         assert(v.A == nullptr);
-        assert(v.size > 0);
-        assert(v.capacity > 0);
         bool throws_expected_exception = false;
         size_t old_size = v.size;
         size_t old_capacity = v.capacity;
@@ -622,7 +617,6 @@ void test_front() {
         assert(v.capacity == old_capacity);
         assert(v.A == nullptr);
     }
-    */
 
     // ATTEMPT TO GET FRONT OF EMPTY ARRAY
     {
@@ -752,18 +746,14 @@ void test_front() {
 }
 
 void test_back() {
-    /* OBSOLETE
     // ATTEMPT TO GET BACK OF NULL ARRAY
     {
-        vector v{10, 1, nullptr};
+        //vector v{10, 1, nullptr};
+        vector v;
         // pre
         //   A is nullptr
-        //   capacity is > 0 (lie)
-        //   size is > 0 (lie)
         // expect back of null to throw invalid_argument exception
         assert(v.A == nullptr);
-        assert(v.size > 0);
-        assert(v.capacity > 0);
         bool throws_expected_exception = false;
         size_t old_size = v.size;
         size_t old_capacity = v.capacity;
@@ -784,7 +774,7 @@ void test_back() {
         assert(v.capacity == old_capacity);
         assert(v.A == nullptr);
     }
-    */
+
     // ATTEMPT TO GET BACK OF EMPTY ARRAY
     {
         //vector v{10, 0, new int[10]};
@@ -912,17 +902,13 @@ void test_back() {
 }
 
 void test_at() {
-    /* OBSOLETE
     // ATTEMPT TO ACCESS NULL ARRAY
     {
-        vector v{1, 1, nullptr};
+        //vector v{1, 1, nullptr};
+        vector v;
         // pre
         //   A is nullptr
-        //   size is > 0 (lie)
-        //   capacity is > 0 (lie)
         assert(v.A == nullptr);
-        assert(v.size > 0);
-        assert(v.capacity > 0);
         // expect at of null to throw invalid_argument exception
         bool threw_expected_exception = false;
         try {
@@ -936,9 +922,7 @@ void test_at() {
         //   invalid_argument exception was caught
         //   size = 1 (lie)
         assert(threw_expected_exception);
-        assert(v.size == 1);
     }
-    */
 
     // ATTEMPT TO ACCESS EMPTY ARRAY
     {
@@ -1098,40 +1082,43 @@ void test_at() {
 }
 
 void test_resize() {
-    //vector v{10, 5, new int[10]{12,13,17,15,16}};
-    vector v({12,13,17,15,16});
-    v.reserve(10);
-    // pre
-    //   A is [12, 13, 17, 15, 16]
-    //   size is 5
-    //   capacity is 10
-    assert(v.A[0] == 12);
-    assert(v.A[1] == 13);
-    assert(v.A[2] == 17);
-    assert(v.A[3] == 15);
-    assert(v.A[4] == 16);
-    assert(v.size == 5);
-    assert(v.capacity == 10);
-    // expect resize to double the capacity
-    v.resize();
-    // post
-    //   A is [12, 13, 17, 15, 16]
-    //   size is 5
-    //   capacity is 20
-    assert(v.A[0] == 12);
-    assert(v.A[1] == 13);
-    assert(v.A[2] == 17);
-    assert(v.A[3] == 15);
-    assert(v.A[4] == 16);
-    // zeros in new part of array
-    assert(v.A[10] == 0);
-    assert(v.A[19] == 0);
-    assert(v.size == 5);
-    assert(v.capacity == 20);
+    {
+        //vector v{10, 5, new int[10]{12,13,17,15,16}};
+        vector v({12,13,17,15,16});
+        v.reserve(10);
+        // pre
+        //   A is [12, 13, 17, 15, 16]
+        //   size is 5
+        //   capacity is 10
+        assert(v.A[0] == 12);
+        assert(v.A[1] == 13);
+        assert(v.A[2] == 17);
+        assert(v.A[3] == 15);
+        assert(v.A[4] == 16);
+        assert(v.size == 5);
+        assert(v.capacity == 10);
+        // expect resize to double the capacity
+        v.resize();
+        // post
+        //   A is [12, 13, 17, 15, 16]
+        //   size is 5
+        //   capacity is 20
+        assert(v.A[0] == 12);
+        assert(v.A[1] == 13);
+        assert(v.A[2] == 17);
+        assert(v.A[3] == 15);
+        assert(v.A[4] == 16);
+        // zeros in new part of array
+        assert(v.A[10] == 0);
+        assert(v.A[19] == 0);
+        assert(v.size == 5);
+        assert(v.capacity == 20);
 
-    // no easy way to tell if the allocation was _actually_ correct
+        // no easy way to tell if the allocation was _actually_ correct
 
-    //delete[] v.A;
+        //delete[] v.A;
+    }
+
 }
 
 void test_pop_front() {
