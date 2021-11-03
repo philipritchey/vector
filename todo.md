@@ -24,16 +24,20 @@
 1. [X] insert(index, value)
 1. [X] readme
 
-## wednesday 27 oct
-1. [ ] pop_front()
-1. [ ] erase(index)
+## ~~wednesday 27 oct~~ asynchronous
+1. [X] pop_front()
+1. [X] erase(index)
+1. [ ] erase(first, last)
 1. [ ] change struct to class (refactor)
 
+## wednesday 3 nov
+1. [X] copy constructor (ro3)
+1. [X] copy assignment operator (ro3)
+1. [X] destructor (ro3)
+1. [ ] refactor tests to use constructors
 
-## friday 29 oct
-1. [ ] copy constructor (ro3)
-1. [ ] copy assignment operator (ro3)
-1. [ ] destructor (ro3)
+## friday 5 nov
+1. [ ] integration testing
 1. [ ] iterator
 1. [ ] template (refactor)
 1. [ ] shrink_to_fit

@@ -13,13 +13,14 @@ void test_construct() {
     }
 
     {
-        vector v{101, 53, new int[101]{42}};
+        //vector v{101, 53, new int[101]{42}};
+        vector v(101);
         assert(v.capacity == 101);
-        assert(v.size == 53);
+        assert(v.size == 101);
         assert(v.A != nullptr);
-        assert(v.A[0] == 42);
-
-        delete[] v.A;
+        for (size_t index = 0; index < 101; index++) {
+            assert(v.data()[index] == 0); 
+        }
     }
 }
 
@@ -45,9 +46,10 @@ void test_push_back() {
         assert(v.capacity == 1);
         assert(v.size== 1);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
+    /* OBSOLETE
     // INSERT INTO NULL ARRAY (LIE ABOUT CAPACITY)
     {
         vector v{1,0,nullptr};
@@ -68,7 +70,7 @@ void test_push_back() {
         assert(v.capacity == 1);
         assert(v.size == 1);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // INSERT VALUE INTO ARRAY WITH CAPACITY 0
@@ -92,12 +94,15 @@ void test_push_back() {
         assert(v.size == 1);
         assert(v.A[0] == -1);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
+    */
 
     // INSERT VALUE INTO EMPTY ARRAY
     {
-        vector v{10, 0, new int[10]{2}};
+        //vector v{10, 0, new int[10]{2}};
+        vector v;
+        v.reserve(10);
         // preconditions
         //   capacity > 0
         //   size is 0
@@ -116,12 +121,14 @@ void test_push_back() {
         assert(v.size == 1);
         assert(v.A[0] == 1);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // FILL UP THE ARRAY
     {
-        vector v{10,0,new int[10]{}};
+        //vector v{10,0,new int[10]{}};
+        vector v;
+        v.reserve(10);
         for (int i = 0; i < 10; i++) {
             // preconditions
             //   size is i
@@ -145,12 +152,13 @@ void test_push_back() {
             assert(v.A[i] == i);
         }
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // INSERT INTO A FULL ARRAY
     {
-        vector v{2,2,new int[2]{10,11}};
+        //vector v{2,2,new int[2]{10,11}};
+        vector v({10,11});
         // preconditions
         //   capacity > 0
         //   size equals capacity
@@ -169,7 +177,7 @@ void test_push_back() {
         assert(v.A[1] == 11);
         assert(v.A[2] == 1);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 }
 
@@ -195,9 +203,10 @@ void test_push_front() {
         assert(v.capacity == 1);
         assert(v.size== 1);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
+    /* OBSOLETE
     // INSERT INTO NULL ARRAY (LIE ABOUT CAPACITY)
     {
         vector v{1,0,nullptr};
@@ -218,7 +227,7 @@ void test_push_front() {
         assert(v.capacity == 1);
         assert(v.size == 1);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // INSERT VALUE INTO ARRAY WITH CAPACITY 0
@@ -242,12 +251,15 @@ void test_push_front() {
         assert(v.size == 1);
         assert(v.A[0] == -1);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
+    */
 
     // INSERT VALUE INTO EMPTY ARRAY
     {
-        vector v{10, 0, new int[10]{2}};
+        //vector v{10, 0, new int[10]{2}};
+        vector v;
+        v.reserve(10);
         // preconditions
         //   capacity > 0
         //   size is 0
@@ -266,12 +278,14 @@ void test_push_front() {
         assert(v.size == 1);
         assert(v.A[0] == 1);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // FILL UP THE ARRAY
     {
-        vector v{10,0,new int[10]{}};
+        //vector v{10,0,new int[10]{}};
+        vector v;
+        v.reserve(10);
         for (int i = 0; i < 10; i++) {
             // preconditions
             //   size is i
@@ -299,12 +313,13 @@ void test_push_front() {
             assert(v.A[i] == 9-i);
         }
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // INSERT INTO A FULL ARRAY
     {
-        vector v{2,2,new int[2]{10,11}};
+        //vector v{2,2,new int[2]{10,11}};
+        vector v({10,11});
         // preconditions
         //   capacity > 0
         //   size equals capacity
@@ -324,7 +339,7 @@ void test_push_front() {
         assert(v.A[1] == 10);
         assert(v.A[2] == 11);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 }
 
@@ -414,10 +429,11 @@ void test_insert() {
     assert(v.A[2] == 1);
     assert(v.A[3] == 3);
 
-    delete[] v.A;
+    //delete[] v.A;
 }
 
 void test_pop_back() {
+    /* OBSOLETE
     // REMOVE FROM NULL ARRAY
     {
         vector v{1,1,nullptr};
@@ -448,10 +464,12 @@ void test_pop_back() {
         assert(v.capacity == old_capacity);
         assert(v.size== old_size);
     }
+    */
 
     // REMOVE THE LAST ELEMENT
     {
-        vector v{10, 10, new int[10]{1,2,3,4,5,6,7,8,9,10}};
+        //vector v{10, 10, new int[10]{1,2,3,4,5,6,7,8,9,10}};
+        vector v({1,2,3,4,5,6,7,8,9,10});
         // preconditions
         //   capacity is > 1
         //   size is <= capacity and > 1
@@ -474,12 +492,13 @@ void test_pop_back() {
         assert(v.size == old_size - 1);
         assert(v.A[v.size-1] == 9);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // REMOVE ALL ELEMENTS FROM BACK
     {
-        vector v{9,9,new int[9]{1,2,3,4,5,6,7,8,9}};
+        //vector v{9,9,new int[9]{1,2,3,4,5,6,7,8,9}};
+        vector v({1,2,3,4,5,6,7,8,9});
         size_t old_capacity = v.capacity;
         for (int i = 9; i > 0; i--) {
             // preconditions
@@ -501,7 +520,7 @@ void test_pop_back() {
             }
         }
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // ATTEMPT TO REMOVE FROM NULL
@@ -535,7 +554,9 @@ void test_pop_back() {
 
     // ATTEMPT TO REMOVE FROM EMPTY
     {
-        vector v{5,0,new int[5]{1}};
+        //vector v{5,0,new int[5]{1}};
+        vector v;
+        v.reserve(5);
         // preconditions
         //   size is 0
         //   capacity is > 0
@@ -563,12 +584,13 @@ void test_pop_back() {
         assert(v.capacity == old_capacity);
         assert(v.A == old_A);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
 }
 
 void test_front() {
+    /* OBSOLETE
     // ATTEMPT TO GET FRONT OF NULL ARRAY
     {
         vector v{10, 1, nullptr};
@@ -600,10 +622,13 @@ void test_front() {
         assert(v.capacity == old_capacity);
         assert(v.A == nullptr);
     }
+    */
 
     // ATTEMPT TO GET FRONT OF EMPTY ARRAY
     {
-        vector v{10, 0, new int[10]};
+        //vector v{10, 0, new int[10]};
+        vector v;
+        v.reserve(10);
         // pre
         //   A is not null
         //   size is 0
@@ -630,23 +655,22 @@ void test_front() {
         assert(v.capacity == old_capacity);
         assert(v.A == old_A);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // GET FRONT OF NON-EMPTY ARRAY
     {
-        vector v{4, 1, new int[4]{10,11}};
+        //vector v{4, 2, new int[4]{10,11}};
+        vector v({10,11});
+        v.reserve(4);
         // pre
         //   A[0] is 10
         //   A[1] is 11
         //   size is 1
         assert(v.A[0] == 10);
         assert(v.A[1] == 11);
-        assert(v.size == 1);
-        // expect front of {10} to be 10
-        assert(v.front() == 10);
-        // expect front of {10, 11} to be 10
-        v.size = 2;
+        assert(v.size == 2);
+        // expect front of to be 10
         assert(v.front() == 10);
         // post
         //   A[0] is 10
@@ -656,16 +680,17 @@ void test_front() {
         assert(v.A[1] == 11);
         assert(v.size == 2);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // FRONT RETURNS LVALUE REFERENCE
     {
-        vector v{3,2,new int[3]{}};
+        //vector v{3,2,new int[3]{}};
+        vector v(3);
         // pre
         //   A at 0 is not 12
         assert(v.A[0] != 12);
-        assert(v.size == 2);
+        assert(v.size == 3);
         // expect assignment to return new value
         assert((v.front() = 12) == 12);
         // post
@@ -674,17 +699,18 @@ void test_front() {
         assert(v.A[0] == 12);
         assert(v.A[1] == 0);
         assert(v.A[2] == 0);
-        assert(v.size == 2);
+        assert(v.size == 3);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // FRONT OF CONST ARRAY
     {
-        const vector constV{3,3,new int[3]{102}};
-        assert(constV.front() == 102);
+        //const vector constV{3,3,new int[3]{102}};
+        const vector v({102,0,0});
+        assert(v.front() == 102);
 
-        delete[] constV.A;
+        //delete[] constV.A;
     }
 
     // FRONT OF CONST NULL
@@ -710,21 +736,23 @@ void test_front() {
 
     // FRONT OF CONST EMPTY
     {
-        const vector constEmpty{1,0,new int[1]{}};
+        //const vector constEmpty{1,0,new int[1]{}};
+        const vector v(0);
         bool caught_expected_exception = false;
         try {
-            constEmpty.front();
+            v.front();
         } catch (const std::out_of_range& err) {
             caught_expected_exception = true;
         } catch (...) {}
         assert(caught_expected_exception);
-        assert(constEmpty.A != nullptr);
+        assert(v.A != nullptr);
 
-        delete[] constEmpty.A;
+        //delete[] constEmpty.A;
     }
 }
 
 void test_back() {
+    /* OBSOLETE
     // ATTEMPT TO GET BACK OF NULL ARRAY
     {
         vector v{10, 1, nullptr};
@@ -756,10 +784,12 @@ void test_back() {
         assert(v.capacity == old_capacity);
         assert(v.A == nullptr);
     }
-
+    */
     // ATTEMPT TO GET BACK OF EMPTY ARRAY
     {
-        vector v{10, 0, new int[10]};
+        //vector v{10, 0, new int[10]};
+        vector v;
+        v.reserve(10);
         // pre
         //   A is not null
         //   size is 0
@@ -786,23 +816,21 @@ void test_back() {
         assert(v.capacity == old_capacity);
         assert(v.A == old_A);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // GET BACK OF NON-EMPTY ARRAY
     {
-        vector v{4, 1, new int[4]{10,11}};
+        //vector v{4, 2, new int[4]{10,11}};
+        vector v({10,11});
+        v.reserve(4);
         // pre
         //   A[0] is 10
         //   A[1] is 11
         //   size is 1
         assert(v.A[0] == 10);
         assert(v.A[1] == 11);
-        assert(v.size == 1);
-        // expect back of {10} to be 10
-        assert(v.front() == 10);
-        // expect back of {10, 11} to be 10
-        v.size = 2;
+        // expect back to be 11
         assert(v.back() == 11);
         // post
         //   A[0] is 10
@@ -812,35 +840,37 @@ void test_back() {
         assert(v.A[1] == 11);
         assert(v.size == 2);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // BACK RETURNS LVALUE REFERENCE
     {
-        vector v{3,2,new int[3]{}};
+        //vector v{3,3,new int[3]{}};
+        vector v(3);
         // pre
         //   A at 1 is not 12
         assert(v.A[1] != 12);
-        assert(v.size == 2);
+        assert(v.size == 3);
         // expect assignment to return new value
         assert((v.back() = 12) == 12);
         // post
         //   A at 1 is 12, others unchanged
         //   size is unchanged
         assert(v.A[0] == 0);
-        assert(v.A[1] == 12);
-        assert(v.A[2] == 0);
-        assert(v.size == 2);
+        assert(v.A[1] == 0);
+        assert(v.A[2] == 12);
+        assert(v.size == 3);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // BACK OF CONST ARRAY
     {
-        const vector constV{3,3,new int[3]{0,0,221}};
-        assert(constV.back() == 221);
+        //const vector constV{3,3,new int[3]{0,0,221}};
+        const vector v({0,0,221});
+        assert(v.back() == 221);
 
-        delete[] constV.A;
+        //delete[] constV.A;
     }
 
     // BACK OF CONST NULL
@@ -866,21 +896,23 @@ void test_back() {
 
     // BACK OF CONST EMPTY
     {
-        const vector constEmpty{1,0,new int[1]{}};
+        //const vector constEmpty{1,0,new int[1]{}};
+        const vector v(0);
         bool caught_expected_exception = false;
         try {
-            constEmpty.back();
+            v.back();
         } catch (const std::out_of_range& err) {
             caught_expected_exception = true;
         } catch (...) {}
         assert(caught_expected_exception);
-        assert(constEmpty.A != nullptr);
+        assert(v.A != nullptr);
 
-        delete[] constEmpty.A;
+        //delete[] constEmpty.A;
     }
 }
 
 void test_at() {
+    /* OBSOLETE
     // ATTEMPT TO ACCESS NULL ARRAY
     {
         vector v{1, 1, nullptr};
@@ -906,10 +938,13 @@ void test_at() {
         assert(threw_expected_exception);
         assert(v.size == 1);
     }
+    */
 
     // ATTEMPT TO ACCESS EMPTY ARRAY
     {
-        vector v{5,0,new int[5]};
+        //vector v{5,0,new int[5]};
+        vector v;
+        v.reserve(5);
         // pre
         //   A is not null
         //   size = 0
@@ -930,12 +965,13 @@ void test_at() {
         assert(threw_expected_exception);
         assert(v.size== 0);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // ACCESS MIDDLE OF ARRAY
     {
-        vector v{10, 10, new int[10]{9,-1,-2,0,-4,3,7,5,6,8}};
+        //vector v{10, 10, new int[10]{9,-1,-2,0,-4,3,7,5,6,8}};
+        vector v({9,-1,-2,0,-4,3,7,5,6,8});
         // pre
         //   A[8] is 6
         //   A[7] is 5
@@ -959,12 +995,14 @@ void test_at() {
         assert(v.A[3] == 0);
         assert(v.size == 10);
         
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // ATTEMPT TO ACCESS ARRAY OUT OF BOUNDS
     {
-        vector v{10, 5, new int[10]{1,2,3,4,5}};
+        //vector v{10, 5, new int[10]{1,2,3,4,5}};
+        vector v({1,2,3,4,5});
+        v.reserve(10);
         // pre
         //   size is 5
         assert(v.size == 5);
@@ -989,12 +1027,13 @@ void test_at() {
         }
         assert(threw_expected_exception);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // ATTEMPT TO ACCESS CONST ARRAY OUT OF BOUNDS
     {
-        const vector v{10, 5, new int[10]{1,2,3,4,5}};
+        //const vector v{10, 5, new int[10]{1,2,3,4,5}};
+        const vector v({1,2,3,4,5});
         // pre
         //   size is 5
         assert(v.size == 5);
@@ -1009,12 +1048,14 @@ void test_at() {
         }
         assert(threw_expected_exception);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // AT RETURNS LVALUE REFERENCE
     {
-        vector v{10, 5, new int[10]{}};
+        //vector v{10, 5, new int[10]{}};
+        vector v(5);
+        v.reserve(10);
         // pre
         //   size > 3
         //   A at 2 is not 7
@@ -1029,15 +1070,16 @@ void test_at() {
         assert(v.size == old_size);
         assert(v.A[2] == 7);
 
-        delete[] v.A;
+        //delete[] v.A;
     }
 
     // ACCESS CONST ARRAY
     {
-        const vector constV{3, 2, new int[3]{0,121}};
-        assert(constV.at(1) == 121);
+        //const vector constV{3, 2, new int[3]{0,121}};
+        const vector v({0,121,0});
+        assert(v.at(1) == 121);
 
-        delete[] constV.A;
+        //delete[] constV.A;
     }
 
     // ATTEMPT TO ACCESS CONST NULL ARRAY
@@ -1056,7 +1098,9 @@ void test_at() {
 }
 
 void test_resize() {
-    vector v{10, 5, new int[10]{12,13,17,15,16}};
+    //vector v{10, 5, new int[10]{12,13,17,15,16}};
+    vector v({12,13,17,15,16});
+    v.reserve(10);
     // pre
     //   A is [12, 13, 17, 15, 16]
     //   size is 5
@@ -1087,9 +1131,399 @@ void test_resize() {
 
     // no easy way to tell if the allocation was _actually_ correct
 
-    delete[] v.A;
+    //delete[] v.A;
 }
 
+void test_pop_front() {
+    /* OBSOLETE
+    // REMOVE FROM NULL ARRAY
+    {
+        vector v{1,1,nullptr};
+        // preconditions
+        //   A is null
+        //   capacity is > 0 (lie)
+        //   size is > 0 (lie)
+        assert(v.A == nullptr);
+        assert(v.capacity > 0);
+        assert(v.size > 0);
+        size_t old_size = v.size;
+        size_t old_capacity = v.capacity;
+        // expect pop_front to throw invalid_argument exception
+        bool threw_expected_exception = false;
+        try {
+            v.pop_front();
+        } catch (const std::invalid_argument& err) {
+            threw_expected_exception = true;
+        } catch (...) {
+            assert(!"pop_front from null array throws wrong type of exception");
+        }
+        assert(threw_expected_exception);
+        // postconditions
+        //   A is null
+        //   capacity did not change
+        //   size did not change
+        assert(v.A == nullptr);
+        assert(v.capacity == old_capacity);
+        assert(v.size== old_size);
+    }
+    */
+
+    // REMOVE THE FIRST ELEMENT
+    {
+        //vector v{10, 10, new int[10]{1,2,3,4,5,6,7,8,9,10}};
+        vector v({1,2,3,4,5,6,7,8,9,10});
+        // preconditions
+        //   capacity is > 1
+        //   size is <= capacity and > 1
+        //   A at 1 after front is 2
+        //   A at front is 1
+        assert(v.capacity > 1);
+        assert(v.size <= v.capacity);
+        assert(v.size > 1);
+        assert(v.A[1] == 2);
+        assert(v.A[0] == 1);
+        // expect pop_front to return 1
+        size_t old_size = v.size;
+        size_t old_capacity = v.capacity;
+        assert(v.pop_front() == 1);
+        // postconditions
+        //   capacity did not change
+        //   size is 1 less than previous
+        //   A at front is 2
+        assert(v.capacity == old_capacity);
+        assert(v.size == old_size - 1);
+        assert(v.A[0] == 2);
+
+        //delete[] v.A;
+    }
+
+    // REMOVE ALL ELEMENTS FROM FRONT
+    {
+        //vector v{9,9,new int[9]{1,2,3,4,5,6,7,8,9}};
+        vector v({1,2,3,4,5,6,7,8,9});
+        size_t old_capacity = v.capacity;
+        for (int i = 1; i < 10; i++) {
+            // preconditions
+            //   capacity is > 0
+            //   size is 10 - i
+            //   A at front is i
+            assert(v.size == 10 - unsigned(i));
+            assert(v.A[0] == i);
+            // expect pop_front to return i
+            size_t old_size = 10 - unsigned(i);
+            assert(v.pop_front() == i);
+            // postconditions
+            //   capacity did not change
+            //   size decreases by 1
+            //   A at index i-2 (end) is i-1
+            assert(v.capacity == old_capacity);
+            assert(v.size == old_size - 1);
+            if (v.size > 0) {
+                assert(v.A[0] == i+1);
+            }
+        }
+
+        //delete[] v.A;
+    }
+
+    // ATTEMPT TO REMOVE FROM EMPTY NULL
+    {
+        vector v;
+        // preconditions
+        //   size is 0
+        //   capacity is 0
+        //   A is null
+        assert(v.size== 0);
+        assert(v.capacity == 0);
+        assert(v.A == nullptr);
+        // expect pop_front to throw invalid_argument exception
+        bool threw_expected_exception = false;
+        try {
+            v.pop_front();
+        } catch (const std::invalid_argument& err) {
+            threw_expected_exception = true;
+        } catch(...) {
+            cout << "pop_front threw the wrong type of exception" << endl;
+        }
+        assert(threw_expected_exception);
+        // postconditions
+        //   size is 0
+        //   capacity is 0
+        //   A is null
+        assert(v.size== 0);
+        assert(v.capacity == 0);
+        assert(v.A == nullptr);
+    }
+
+    // ATTEMPT TO REMOVE FROM EMPTY
+    {
+        //vector v{5,0,new int[5]{1}};
+        vector v;
+        v.reserve(5);
+        // preconditions
+        //   size is 0
+        //   capacity is > 0
+        //   A is not null
+        assert(v.size == 0);
+        assert(v.capacity > 0);
+        assert(v.A != nullptr);
+        // expect pop_front to throw invalid_argument exception
+        size_t old_capacity = v.capacity;
+        int* old_A = v.A;
+        bool threw_expected_exception = false;
+        try {
+            v.pop_front();
+        } catch (const std::out_of_range& err) {
+            threw_expected_exception = true;
+        } catch(...) {
+            cout << "pop_front threw the wrong type of exception" << endl;
+        }
+        assert(threw_expected_exception);
+        // postconditions
+        //   size is 0
+        //   capacity is unchanged
+        //   A is unchanged
+        assert(v.size== 0);
+        assert(v.capacity == old_capacity);
+        assert(v.A == old_A);
+
+        //delete[] v.A;
+    }
+}
+
+void test_erase_1() {
+    // ERASE FROM NULL
+    {
+        vector v;
+        assert(v.capacity == 0);
+        assert(v.size == 0);
+        assert(v.A == nullptr);
+        bool threw_expected_exception = false;
+        try {
+            v.erase(0);
+        } catch (const std::out_of_range& err) {
+            threw_expected_exception = true;
+        } catch (...) {
+            cout << "erase threw the wrong type of exception" << endl;
+        }
+        assert(threw_expected_exception);
+        assert(v.capacity == 0);
+        assert(v.size == 0);
+        assert(v.A == nullptr);
+    }
+
+    // ERASE FROM EMPTY
+    {
+        //vector v{10,0,new int[10]{}};
+        vector v;
+        v.reserve(10);
+        assert(v.capacity == 10);
+        assert(v.size == 0);
+        assert(v.A != nullptr);
+        int* old_A = v.A;
+        bool threw_expected_exception = false;
+        try {
+            v.erase(0);
+        } catch (const std::out_of_range& err) {
+            threw_expected_exception = true;
+        } catch (...) {
+            cout << "erase threw the wrong type of exception" << endl;
+        }
+        assert(threw_expected_exception);
+        assert(v.capacity == 10);
+        assert(v.size == 0);
+        assert(v.A == old_A);
+    }
+
+    // ERASE OUT OF BOUNDS
+    {
+        //vector v{10,3,new int[10]{8,6,7}};
+        vector v({8,6,7});
+        v.reserve(10);
+        assert(v.capacity == 10);
+        assert(v.size == 3);
+        assert(v.A != nullptr);
+        int* old_A = v.A;
+        bool threw_expected_exception = false;
+        try {
+            v.erase(3);
+        } catch (const std::out_of_range& err) {
+            threw_expected_exception = true;
+        } catch (...) {
+            cout << "erase threw the wrong type of exception" << endl;
+        }
+        assert(threw_expected_exception);
+        assert(v.capacity == 10);
+        assert(v.size == 3);
+        assert(v.A == old_A);
+        assert(v.A[0] == 8);
+        assert(v.A[1] == 6);
+        assert(v.A[2] == 7);
+    }
+
+    // ERASE 1 ELEMENT
+    //   FRONT
+    {
+        //vector v{10,3,new int[10]{8,6,7}};
+        vector v({8,6,7});
+        v.reserve(10);
+        assert(v.A[0] == 8);
+        assert(v.A[1] == 6);
+        assert(v.capacity == 10);
+        assert(v.size == 3);
+        assert(v.A != nullptr);
+        int* old_A = v.A;
+        bool threw_exception = false;
+        try {
+            v.erase(0);
+        } catch (...) {
+            threw_exception = true;
+        }
+        assert(!threw_exception);
+        assert(v.A[0] == 6);
+        assert(v.A[1] == 7);
+        assert(v.capacity == 10);
+        assert(v.size == 2);
+        assert(v.A == old_A);
+    }
+    //   MIDDLE
+    {
+        //vector v{10,3,new int[10]{8,6,7}};
+        vector v({8,6,7});
+        v.reserve(10);
+        assert(v.A[1] == 6);
+        assert(v.A[2] == 7);
+        assert(v.capacity == 10);
+        assert(v.size == 3);
+        assert(v.A != nullptr);
+        int* old_A = v.A;
+        bool threw_exception = false;
+        try {
+            v.erase(1);
+        } catch (...) {
+            threw_exception = true;
+        }
+        assert(!threw_exception);
+        assert(v.A[0] == 8);
+        assert(v.A[1] == 7);
+        assert(v.capacity == 10);
+        assert(v.size == 2);
+        assert(v.A == old_A);
+    }
+    //   BACK
+    {
+        //vector v{10,3,new int[10]{8,6,7}};
+        vector v({8,6,7});
+        v.reserve(10);
+        assert(v.A[2] == 7);
+        assert(v.capacity == 10);
+        assert(v.size == 3);
+        assert(v.A != nullptr);
+        int* old_A = v.A;
+        bool threw_exception = false;
+        try {
+            v.erase(2);
+        } catch (...) {
+            threw_exception = true;
+        }
+        assert(!threw_exception);
+        assert(v.A[0] == 8);
+        assert(v.A[1] == 6);
+        assert(v.capacity == 10);
+        assert(v.size == 2);
+        assert(v.A == old_A);
+    }
+}
+
+void test_erase_range() {
+    // ERASE FROM NULL
+    // ERASE FROM EMPTY
+    // ERASE OUT OF BOUNDS
+    //   1 ELEMENT
+    //   RANGE
+    // ERASE 1 ELEMENT
+    // ERASE RANGE OF ELEMENTS
+    //   FRONT
+    //   MIDDLE
+    //   BACK
+    //   WHOLE THING
+}
+
+void test_rule_of_three() {
+    // destructor
+    // copy constructor
+    // copy assignment
+
+    // make a vector
+    vector v;
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
+    size_t original_size = v.size;
+    size_t original_capacity = v.capacity;
+    {
+        // copy it
+        vector copy = v;
+
+        // verify copy correctly
+        assert(v.size == original_size);
+        assert(v.capacity == original_capacity);
+        assert(copy.size == v.size);
+        assert(copy.capacity == v.capacity);
+        for (size_t i = 0; i < v.size; i++) {
+            assert(copy.at(i) == int(i+1));
+            assert(copy.at(i) == int(v.at(i)));
+        }
+
+        // verify deep copy
+        copy.push_back(4);
+        v.push_back(5);
+        assert(v.back() == 5);
+        assert(copy.back() == 4);
+
+        // copy assignment
+        copy.push_back(5);
+        // copy: [1, 2, 3, 4, 5]
+        //    v: [1, 2, 3, 5]
+        v = copy;
+        // expect v: [1, 2, 3, 4, 5]
+
+        // verify copy correctly
+        assert(v.size == copy.size);
+        assert(v.capacity == copy.capacity);
+        assert(copy.size == 5);
+        assert(copy.capacity == 8);
+        for (size_t i = 0; i < copy.size; i++) {
+            assert(copy.at(i) == int(i+1));
+            assert(copy.at(i) == int(v.at(i)));
+        }
+
+        // verify deep copy
+        copy.push_back(6);
+        v.push_back(7);
+        assert(v.back() == 7);
+        assert(copy.back() == 6);
+
+        // destruct copy
+    }
+
+    // verify that v is still OK
+    assert(v.size == original_size+3);
+    assert(v.capacity == 2*original_capacity);
+    for (size_t i = 0; i < original_size+2; i++) {
+        assert(v.at(i) == int(i+1));
+    }
+    assert(v.back() == 7);
+
+    // self-assignment
+    v = v;
+    assert(v.size == original_size+3);
+    assert(v.capacity == 2*original_capacity);
+    for (size_t i = 0; i < original_size+2; i++) {
+        assert(v.at(i) == int(i+1));
+    }
+    assert(v.back() == 7);
+}
 
 int main() {
 
@@ -1098,12 +1532,92 @@ int main() {
     test_push_front();
     test_insert();
     test_pop_back();
+    test_pop_front();
+    test_erase_1();
+    test_erase_range();
     test_front();
     test_back();
     test_at();
     test_resize();
+    test_rule_of_three();
 
     cout << "ALL TESTS PASSING" << endl;
 
     return 0;
 } 
+
+/*
+void test_rule_of_three() {
+    // destructor
+    // copy constructor
+    // copy assignment
+
+    // make a vector
+    vector v;
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
+    size_t original_size = v.size;
+    size_t original_capacity = v.capacity;
+    {
+        // copy it
+        vector copy = v;
+
+        // verify copy correctly
+        assert(v.size == original_size);
+        assert(v.capacity == original_capacity);
+        assert(copy.size == v.size);
+        assert(copy.capacity == v.capacity);
+        for (size_t i = 0; i < v.size; i++) {
+            assert(copy.at(i) == int(i+1));
+            assert(v.at(i) == int(i+1));
+            assert(copy.at(i) == int(v.at(i)));
+        }
+
+        // verify deep copy
+        copy.push_back(4);
+        v.push_back(5);
+        assert(v.back() == 5);
+        assert(copy.back() == 4);
+
+        // copy assignment
+        copy.pop_back();
+        v = copy;
+
+        // verify copy correctly
+        assert(v.size == original_size);
+        assert(v.capacity == original_capacity);
+        assert(copy.size == original_size);
+        assert(copy.capacity == original_capacity);
+        for (size_t i = 0; i < original_size; i++) {
+            assert(v.at(i) == int(i+1));
+            assert(copy.at(i) == int(i+1));  
+            assert(v.at(i) == int(v.at(i)));
+        }
+
+        // verify deep copy
+        copy.push_back(4);
+        v.push_back(5);
+        assert(v.back() == 5);
+        assert(copy.back() == 4);
+
+        // destruct copy
+    }
+
+    // verify that v is still OK
+    assert(v.size == original_size+1);
+    assert(v.capacity == original_capacity);
+    for (size_t i = 0; i < original_size; i++) {
+        assert(v.at(i) == int(i+1));
+    }
+    assert(v.back() == 5);
+
+    v = v;
+    assert(v.size == original_size+1);
+    assert(v.capacity == original_capacity);
+    for (size_t i = 0; i < original_size; i++) {
+        assert(v.at(i) == int(i+1));
+    }
+    assert(v.back() == 5);
+}
+*/

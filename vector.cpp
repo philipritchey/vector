@@ -3,6 +3,44 @@
 
 // TODO: define vector methods here
 
+vector::vector() : capacity{0}, size{0}, A{nullptr} {}
+
+vector::vector(size_t capacity, int value) : capacity{capacity}, size{capacity}, A{new int[capacity]{}} {
+    for (size_t index = 0; index < size; index++) {
+        A[index] = value;
+    }
+}
+
+vector::vector(std::initializer_list<int> init) : capacity{init.size()}, size{init.size()}, A{new int[capacity]{}} {
+    size_t index = 0;
+    for (int n : init) {
+        A[index++] = n;
+    }
+}
+
+vector::vector(const vector& other) : capacity{other.capacity}, size{other.size}, A{new int[capacity]{}} {
+    for (size_t index = 0; index < size; index++) {
+        A[index] = other.A[index];
+    }
+}
+
+vector::~vector() {
+    delete[] A;
+}
+
+vector& vector::operator=(const vector& rhs) {
+    if (this != &rhs) {
+        size = rhs.size;
+        capacity = rhs.capacity;
+        delete[] A;
+        A = new int[capacity];
+        for (size_t index = 0; index < size; index++) {
+            A[index] = rhs.A[index];
+        }
+    }
+    return *this;
+}
+
 void vector::push_back(int value) {
     if (!A || capacity == 0) {
         delete[] A;
@@ -64,6 +102,40 @@ int vector::pop_back() {
     int ret = A[size-1];
     size--;
     return ret;
+}
+
+int vector::pop_front() {
+    if (!A) {
+        throw std::invalid_argument("cannot pop from null array");
+    }
+    if (size == 0 || capacity == 0) {
+        throw std::out_of_range("cannot pop from empty array");
+    }
+    int ret = A[0];
+    size--;
+    for (size_t i = 0; i < size; i++) {
+        A[i] = A[i+1];
+    }
+    return ret;
+}
+
+void vector::erase(size_t index) {
+    if (!A || size == 0 || capacity == 0) {
+        throw std::out_of_range("cannot erase from empty array");
+    }
+    if (index >= size) {
+        throw std::out_of_range("refuse to access out of bounds");
+    }
+    if (index == 0) {
+        pop_front();
+    } else if (index == size - 1) {
+        pop_back();
+    } else {
+        size--;
+        for (size_t i = index; i < size; i++) {
+            A[i] = A[i+1];
+        }
+    }
 }
 
 int vector::front() const {
@@ -129,18 +201,29 @@ int& vector::at(size_t index) {
 }
 
 void vector::resize() {
-    // 1. make new and bigger
-    int* B = new int[capacity * 2]{};
-
-    // 2. copy old to new
-    for (size_t index = 0; index < size; index++) {
-        B[index] = A[index];
+    if (capacity > UINT64_MAX/2) {
+        throw std::invalid_argument("cannot resize: too many elements");
     }
-
-    // 3. delete old
-    delete[] A;
-
-    // 4. update {array, capacity}
-    A = B;
-    capacity *= 2;
+    reserve(capacity * 2);
 }
+
+void vector::reserve(size_t new_capacity) {
+    if (new_capacity > capacity) {
+        // 1. make new and bigger
+        int* B = new int[new_capacity]{};
+
+        // 2. copy old to new
+        for (size_t index = 0; index < size; index++) {
+            B[index] = A[index];
+        }
+
+        // 3. delete old
+        delete[] A;
+
+        // 4. update {array, capacity}
+        A = B;
+        capacity = new_capacity;
+    }
+}
+
+const int* vector::data() const { return A; }
