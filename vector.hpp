@@ -7,12 +7,13 @@
 
 // [TODO: define template here]
 
-struct vector {
+class vector {
     // data
-    size_t capacity;
-    size_t size;
+    size_t the_capacity;
+    size_t the_size;
     int* A;
 
+ public:
     // constructors
     vector();
     explicit vector(size_t, int=0);
@@ -20,18 +21,19 @@ struct vector {
     vector(const vector&);
     ~vector();
 
-    //vector(size_t c, size_t s, int* a) : capacity{c}, size{s}, A{a} {}
-
     // operator
     vector& operator=(const vector&);
 
     // methods
+    size_t size() const;
+    size_t capacity() const;
     void push_back(int value);
     void push_front(int value);
     void insert(size_t index, int value);
     int pop_back();
     int pop_front();
     void erase(size_t index);
+    void erase(size_t first, size_t last);
     int front() const;
     int& front();
     int back() const;
@@ -45,15 +47,3 @@ struct vector {
 };
 
 #endif  // VECTOR_HPP
-
-/*
-// constructors
-    vector();
-    vector(const vector&);
-    ~vector();
-
-    vector(size_t c, size_t s, int* a) : capacity{c}, size{s}, A{a} {}
-
-    // operators
-    vector& operator=(const vector&);
-    */

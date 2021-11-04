@@ -27,8 +27,8 @@
 ## ~~wednesday 27 oct~~ asynchronous
 1. [X] pop_front()
 1. [X] erase(index)
-1. [ ] erase(first, last)
-1. [ ] change struct to class (refactor)
+1. [X] erase(first, last)
+1. [X] change struct to class (refactor)
 
 ## wednesday 3 nov
 1. [X] copy constructor (ro3)
@@ -41,3 +41,4 @@
 1. [ ] iterator
 1. [ ] template (refactor)
 1. [ ] shrink_to_fit
+1. [ ] resize (STL vector version)

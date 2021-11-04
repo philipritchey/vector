@@ -3,23 +3,23 @@
 
 // TODO: define vector methods here
 
-vector::vector() : capacity{0}, size{0}, A{nullptr} {}
+vector::vector() : the_capacity{0}, the_size{0}, A{nullptr} {}
 
-vector::vector(size_t capacity, int value) : capacity{capacity}, size{capacity}, A{new int[capacity]{}} {
-    for (size_t index = 0; index < size; index++) {
+vector::vector(size_t count, int value) : the_capacity{count}, the_size{the_capacity}, A{new int[the_capacity]{}} {
+    for (size_t index = 0; index < the_size; index++) {
         A[index] = value;
     }
 }
 
-vector::vector(std::initializer_list<int> init) : capacity{init.size()}, size{init.size()}, A{new int[capacity]{}} {
+vector::vector(std::initializer_list<int> init) : the_capacity{init.size()}, the_size{init.size()}, A{new int[the_capacity]{}} {
     size_t index = 0;
     for (int n : init) {
         A[index++] = n;
     }
 }
 
-vector::vector(const vector& other) : capacity{other.capacity}, size{other.size}, A{new int[capacity]{}} {
-    for (size_t index = 0; index < size; index++) {
+vector::vector(const vector& other) : the_capacity{other.the_capacity}, the_size{other.the_size}, A{new int[the_capacity]{}} {
+    for (size_t index = 0; index < the_size; index++) {
         A[index] = other.A[index];
     }
 }
@@ -30,11 +30,11 @@ vector::~vector() {
 
 vector& vector::operator=(const vector& rhs) {
     if (this != &rhs) {
-        size = rhs.size;
-        capacity = rhs.capacity;
+        the_size = rhs.the_size;
+        the_capacity = rhs.the_capacity;
         delete[] A;
-        A = new int[capacity];
-        for (size_t index = 0; index < size; index++) {
+        A = new int[the_capacity];
+        for (size_t index = 0; index < the_size; index++) {
             A[index] = rhs.A[index];
         }
     }
@@ -42,53 +42,53 @@ vector& vector::operator=(const vector& rhs) {
 }
 
 void vector::push_back(int value) {
-    if (!A || capacity == 0) {
+    if (!A || the_capacity == 0) {
         delete[] A;
         A = new int[1]{};
-        capacity = 1;
-        size = 0;
-    } else if (size >= capacity) {
+        the_capacity = 1;
+        the_size = 0;
+    } else if (the_size >= the_capacity) {
         resize();
     }
-    A[size] = value;
-    size++;
+    A[the_size] = value;
+    the_size++;
 }
 
 void vector::push_front(int value) {
-    if (!A || capacity == 0) {
+    if (!A || the_capacity == 0) {
         delete[] A;
         A = new int[1]{};
-        capacity = 1;
-        size = 0;
-    } else if (size >= capacity) {
+        the_capacity = 1;
+        the_size = 0;
+    } else if (the_size >= the_capacity) {
         resize();
     }
     // shift
-    for (size_t index = size; index > 0; index--) {
+    for (size_t index = the_size; index > 0; index--) {
         A[index] = A[index - 1];
     }
     // assign
     A[0] = value;
-    size++;
+    the_size++;
 }
 
 void vector::insert(size_t index, int value) {
-    if (index > size) {
+    if (index > the_size) {
         throw std::out_of_range("refuse to access out of bounds");
     }
     if (index == 0) {
         push_front(value);
-    } else if (index == size) {
+    } else if (index == the_size) {
         push_back(value);
     } else {
         // middle
         // shift
-        for (size_t i = size; i > index; i--) {
+        for (size_t i = the_size; i > index; i--) {
             A[i] = A[i - 1];
         }
         // assign
         A[index] = value;
-        size++;
+        the_size++;
     }
 }
 
@@ -96,11 +96,11 @@ int vector::pop_back() {
     if (!A) {
         throw std::invalid_argument("cannot pop from null array");
     }
-    if (size == 0 || capacity == 0) {
+    if (the_size == 0 || the_capacity == 0) {
         throw std::out_of_range("cannot pop from empty array");
     }
-    int ret = A[size-1];
-    size--;
+    int ret = A[the_size-1];
+    the_size--;
     return ret;
 }
 
@@ -108,41 +108,54 @@ int vector::pop_front() {
     if (!A) {
         throw std::invalid_argument("cannot pop from null array");
     }
-    if (size == 0 || capacity == 0) {
+    if (the_size == 0 || the_capacity == 0) {
         throw std::out_of_range("cannot pop from empty array");
     }
     int ret = A[0];
-    size--;
-    for (size_t i = 0; i < size; i++) {
+    the_size--;
+    for (size_t i = 0; i < the_size; i++) {
         A[i] = A[i+1];
     }
     return ret;
 }
 
 void vector::erase(size_t index) {
-    if (!A || size == 0 || capacity == 0) {
-        throw std::out_of_range("cannot erase from empty array");
-    }
-    if (index >= size) {
-        throw std::out_of_range("refuse to access out of bounds");
+    if (!A || the_size == 0 || the_capacity == 0 || index >= the_size) {
+        // fail silently
+        return;
     }
     if (index == 0) {
         pop_front();
-    } else if (index == size - 1) {
+    } else if (index == the_size - 1) {
         pop_back();
     } else {
-        size--;
-        for (size_t i = index; i < size; i++) {
+        the_size--;
+        for (size_t i = index; i < the_size; i++) {
             A[i] = A[i+1];
         }
     }
+}
+
+void vector::erase(size_t first, size_t last) {
+    if (!A || the_size == 0 || the_capacity == 0 || first >= the_size) {
+        // fail silently
+        return;
+    }
+    if (last > the_size) {
+        // don't erase past the end of the array
+        last = the_size;
+    }
+    for (size_t index = first; index + last - first < the_size; index++) {
+        A[index] = A[index + last - first];
+    }
+    the_size -= last - first;
 }
 
 int vector::front() const {
     if (A == nullptr) {
         throw std::invalid_argument("cannot get front of null array");
     }
-    if (size == 0) {
+    if (the_size == 0) {
         throw std::out_of_range("cannot get front of empty array");
     }
     return A[0];
@@ -152,7 +165,7 @@ int& vector::front() {
     if (A == nullptr) {
         throw std::invalid_argument("cannot get front of null array");
     }
-    if (size == 0) {
+    if (the_size == 0) {
         throw std::out_of_range("cannot get front of empty array");
     }
     return A[0];
@@ -163,10 +176,10 @@ int vector::back() const {
     if (A == nullptr) {
         throw std::invalid_argument("cannot get back of null array");
     }
-    if (size == 0) {
+    if (the_size == 0) {
         throw std::out_of_range("cannot get back of empty array");
     }
-    return A[size-1];
+    return A[the_size-1];
 }
 
 int& vector::back() {
@@ -174,17 +187,17 @@ int& vector::back() {
     if (A == nullptr) {
         throw std::invalid_argument("cannot get back of null array");
     }
-    if (size == 0) {
+    if (the_size == 0) {
         throw std::out_of_range("cannot get back of empty array");
     }
-    return A[size-1];
+    return A[the_size-1];
 }
 
 int vector::at(size_t index) const {
     if (!A) {
         throw std::invalid_argument("cannot access null array");
     }
-    if (index >= size) {
+    if (index >= the_size) {
         throw std::out_of_range("refuse to access out of bounds");
     }
     return A[index];
@@ -194,36 +207,39 @@ int& vector::at(size_t index) {
     if (!A) {
         throw std::invalid_argument("cannot access null array");
     }
-    if (index >= size) {
+    if (index >= the_size) {
         throw std::out_of_range("refuse to access out of bounds");
     }
     return A[index];
 }
 
 void vector::resize() {
-    if (capacity > UINT64_MAX/2) {
+    if (the_capacity > UINT64_MAX/2) {
         throw std::invalid_argument("cannot resize: too many elements");
     }
-    reserve(capacity * 2);
+    reserve(the_capacity * 2);
 }
 
-void vector::reserve(size_t new_capacity) {
-    if (new_capacity > capacity) {
+void vector::reserve(size_t new_the_capacity) {
+    if (new_the_capacity > the_capacity) {
         // 1. make new and bigger
-        int* B = new int[new_capacity]{};
+        int* B = new int[new_the_capacity]{};
 
         // 2. copy old to new
-        for (size_t index = 0; index < size; index++) {
+        for (size_t index = 0; index < the_size; index++) {
             B[index] = A[index];
         }
 
         // 3. delete old
         delete[] A;
 
-        // 4. update {array, capacity}
+        // 4. update {array, the_capacity}
         A = B;
-        capacity = new_capacity;
+        the_capacity = new_the_capacity;
     }
 }
 
 const int* vector::data() const { return A; }
+
+size_t vector::size() const { return the_size; }
+size_t vector::capacity() const { return the_capacity; }
