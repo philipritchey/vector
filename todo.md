@@ -42,3 +42,4 @@
 1. [ ] template (refactor)
 1. [ ] shrink_to_fit
 1. [ ] resize (STL vector version)
+1. [ ] operator[]

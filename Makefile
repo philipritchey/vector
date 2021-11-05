@@ -18,7 +18,7 @@ test: main.cpp vector.cpp
 coverage: clean main.cpp vector.cpp
 	$(CXX) $(STD) $(DEBUGGING) $(COVERAGE) main.cpp vector.cpp && ./a.out && gcov -mr vector.cpp
 
-leaktest: main.cpp vector.cpp
+memoryerrortest: main.cpp vector.cpp
 	$(CXX) $(STD) $(DEBUGGING) $(SANITIZERS) main.cpp vector.cpp && ./a.out
 
 .PHONY: clean
