@@ -6,15 +6,15 @@ using std::cout, std::endl;
 
 void test_construct() {
     {
-        vector v;
+        vector<int> v;
         assert(v.capacity() == 0);
         assert(v.size() == 0);
         assert(v.data() == nullptr);
     }
 
     {
-        //vector v{101, 53, new int[101]{42}};
-        vector v(101);
+        //vector<int> v{101, 53, new int[101]{42}};
+        vector<int> v(101);
         assert(v.capacity() == 101);
         assert(v.size() == 101);
         assert(v.data() != nullptr);
@@ -24,7 +24,7 @@ void test_construct() {
     }
 
     {
-        vector v({1,2,3,4,5});
+        vector<int> v({1,2,3,4,5});
         assert(v.capacity() == 5);
         assert(v.size() == 5);
         assert(v.data() != nullptr);
@@ -38,7 +38,7 @@ void test_push_back() {
 
     // INSERT INTO NULL ARRAY
     {
-        vector v;
+        vector<int> v;
         // preconditions
         //   A is null
         //   capacity is 0
@@ -62,7 +62,7 @@ void test_push_back() {
     /* OBSOLETE
     // INSERT INTO NULL ARRAY (LIE ABOUT CAPACITY)
     {
-        vector v{1,0,nullptr};
+        vector<int> v{1,0,nullptr};
         // preconditions
         //   A is null
         //   capacity is 1 (lie)
@@ -85,7 +85,7 @@ void test_push_back() {
 
     // INSERT VALUE INTO ARRAY WITH CAPACITY 0
     {
-        vector v{0,0,new int[1]{1}};
+        vector<int> v{0,0,new int[1]{1}};
         // preconditions
         //   capacity is 0 (lie)
         //   size is 0
@@ -110,8 +110,8 @@ void test_push_back() {
 
     // INSERT VALUE INTO EMPTY ARRAY
     {
-        //vector v{10, 0, new int[10]{2}};
-        vector v;
+        //vector<int> v{10, 0, new int[10]{2}};
+        vector<int> v;
         v.reserve(10);
         // preconditions
         //   capacity > 0
@@ -136,8 +136,8 @@ void test_push_back() {
 
     // FILL UP THE ARRAY
     {
-        //vector v{10,0,new int[10]{}};
-        vector v;
+        //vector<int> v{10,0,new int[10]{}};
+        vector<int> v;
         v.reserve(10);
         for (int i = 0; i < 10; i++) {
             // preconditions
@@ -167,8 +167,8 @@ void test_push_back() {
 
     // INSERT INTO A FULL ARRAY
     {
-        //vector v{2,2,new int[2]{10,11}};
-        vector v({10,11});
+        //vector<int> v{2,2,new int[2]{10,11}};
+        vector<int> v({10,11});
         // preconditions
         //   capacity > 0
         //   size equals capacity
@@ -195,7 +195,7 @@ void test_push_front() {
 
     // INSERT INTO NULL ARRAY
     {
-        vector v;
+        vector<int> v;
         // preconditions
         //   A is null
         //   capacity is 0
@@ -219,7 +219,7 @@ void test_push_front() {
     /* OBSOLETE
     // INSERT INTO NULL ARRAY (LIE ABOUT CAPACITY)
     {
-        vector v{1,0,nullptr};
+        vector<int> v{1,0,nullptr};
         // preconditions
         //   A is null
         //   capacity is 1 (lie)
@@ -242,7 +242,7 @@ void test_push_front() {
 
     // INSERT VALUE INTO ARRAY WITH CAPACITY 0
     {
-        vector v{0,0,new int[1]{1}};
+        vector<int> v{0,0,new int[1]{1}};
         // preconditions
         //   capacity is 0 (lie)
         //   size is 0
@@ -267,8 +267,8 @@ void test_push_front() {
 
     // INSERT VALUE INTO EMPTY ARRAY
     {
-        //vector v{10, 0, new int[10]{2}};
-        vector v;
+        //vector<int> v{10, 0, new int[10]{2}};
+        vector<int> v;
         v.reserve(10);
         // preconditions
         //   capacity > 0
@@ -293,8 +293,8 @@ void test_push_front() {
 
     // FILL UP THE ARRAY
     {
-        //vector v{10,0,new int[10]{}};
-        vector v;
+        //vector<int> v{10,0,new int[10]{}};
+        vector<int> v;
         v.reserve(10);
         for (int i = 0; i < 10; i++) {
             // preconditions
@@ -328,8 +328,8 @@ void test_push_front() {
 
     // INSERT INTO A FULL ARRAY
     {
-        //vector v{2,2,new int[2]{10,11}};
-        vector v({10,11});
+        //vector<int> v{2,2,new int[2]{10,11}};
+        vector<int> v({10,11});
         // preconditions
         //   capacity > 0
         //   size equals capacity
@@ -354,7 +354,7 @@ void test_push_front() {
 }
 
 void test_insert() {
-    vector v;
+    vector<int> v;
 
     assert(v.capacity() == 0);
     assert(v.size() == 0);
@@ -446,7 +446,7 @@ void test_pop_back() {
     /* OBSOLETE
     // REMOVE FROM NULL ARRAY
     {
-        vector v{1,1,nullptr};
+        vector<int> v{1,1,nullptr};
         // preconditions
         //   A is null
         //   capacity is > 0 (lie)
@@ -478,8 +478,8 @@ void test_pop_back() {
 
     // REMOVE THE LAST ELEMENT
     {
-        //vector v{10, 10, new int[10]{1,2,3,4,5,6,7,8,9,10}};
-        vector v({1,2,3,4,5,6,7,8,9,10});
+        //vector<int> v{10, 10, new int[10]{1,2,3,4,5,6,7,8,9,10}};
+        vector<int> v({1,2,3,4,5,6,7,8,9,10});
         // preconditions
         //   capacity is > 1
         //   size is <= capacity and > 1
@@ -507,8 +507,8 @@ void test_pop_back() {
 
     // REMOVE ALL ELEMENTS FROM BACK
     {
-        //vector v{9,9,new int[9]{1,2,3,4,5,6,7,8,9}};
-        vector v({1,2,3,4,5,6,7,8,9});
+        //vector<int> v{9,9,new int[9]{1,2,3,4,5,6,7,8,9}};
+        vector<int> v({1,2,3,4,5,6,7,8,9});
         size_t old_capacity = v.capacity();
         for (int i = 9; i > 0; i--) {
             // preconditions
@@ -535,7 +535,7 @@ void test_pop_back() {
 
     // ATTEMPT TO REMOVE FROM NULL
     {
-        vector v;
+        vector<int> v;
         // preconditions
         //   size is 0
         //   capacity is 0
@@ -564,8 +564,8 @@ void test_pop_back() {
 
     // ATTEMPT TO REMOVE FROM EMPTY
     {
-        //vector v{5,0,new int[5]{1}};
-        vector v;
+        //vector<int> v{5,0,new int[5]{1}};
+        vector<int> v;
         v.reserve(5);
         // preconditions
         //   size is 0
@@ -602,7 +602,7 @@ void test_pop_back() {
 void test_front() {
     // ATTEMPT TO GET FRONT OF NULL ARRAY
     {
-        vector v;
+        vector<int> v;
         // pre
         //   A is nullptr
         // expect front of null to throw invalid_argument exception
@@ -630,8 +630,8 @@ void test_front() {
 
     // ATTEMPT TO GET FRONT OF EMPTY ARRAY
     {
-        //vector v{10, 0, new int[10]};
-        vector v;
+        //vector<int> v{10, 0, new int[10]};
+        vector<int> v;
         v.reserve(10);
         // pre
         //   A is not null
@@ -664,8 +664,8 @@ void test_front() {
 
     // GET FRONT OF NON-EMPTY ARRAY
     {
-        //vector v{4, 2, new int[4]{10,11}};
-        vector v({10,11});
+        //vector<int> v{4, 2, new int[4]{10,11}};
+        vector<int> v({10,11});
         v.reserve(4);
         // pre
         //   A[0] is 10
@@ -689,8 +689,8 @@ void test_front() {
 
     // FRONT RETURNS LVALUE REFERENCE
     {
-        //vector v{3,2,new int[3]{}};
-        vector v(3);
+        //vector<int> v{3,2,new int[3]{}};
+        vector<int> v(3);
         // pre
         //   A at 0 is not 12
         assert(v.data()[0] != 12);
@@ -710,8 +710,8 @@ void test_front() {
 
     // FRONT OF CONST ARRAY
     {
-        //const vector constV{3,3,new int[3]{102}};
-        const vector v({102,0,0});
+        //const vector<int> constV{3,3,new int[3]{102}};
+        const vector<int> v({102,0,0});
         assert(v.front() == 102);
 
         //delete[] constv.data();
@@ -719,7 +719,7 @@ void test_front() {
 
     // FRONT OF CONST NULL
     {
-        const vector constNull;
+        const vector<int> constNull;
         // pre
         //   object is const
         //   A is nullptr
@@ -740,8 +740,8 @@ void test_front() {
 
     // FRONT OF CONST EMPTY
     {
-        //const vector constEmpty{1,0,new int[1]{}};
-        const vector v(0);
+        //const vector<int> constEmpty{1,0,new int[1]{}};
+        const vector<int> v(0);
         bool caught_expected_exception = false;
         try {
             v.front();
@@ -758,8 +758,8 @@ void test_front() {
 void test_back() {
     // ATTEMPT TO GET BACK OF NULL ARRAY
     {
-        //vector v{10, 1, nullptr};
-        vector v;
+        //vector<int> v{10, 1, nullptr};
+        vector<int> v;
         // pre
         //   A is nullptr
         // expect back of null to throw invalid_argument exception
@@ -787,8 +787,8 @@ void test_back() {
 
     // ATTEMPT TO GET BACK OF EMPTY ARRAY
     {
-        //vector v{10, 0, new int[10]};
-        vector v;
+        //vector<int> v{10, 0, new int[10]};
+        vector<int> v;
         v.reserve(10);
         // pre
         //   A is not null
@@ -821,8 +821,8 @@ void test_back() {
 
     // GET BACK OF NON-EMPTY ARRAY
     {
-        //vector v{4, 2, new int[4]{10,11}};
-        vector v({10,11});
+        //vector<int> v{4, 2, new int[4]{10,11}};
+        vector<int> v({10,11});
         v.reserve(4);
         // pre
         //   A[0] is 10
@@ -845,8 +845,8 @@ void test_back() {
 
     // BACK RETURNS LVALUE REFERENCE
     {
-        //vector v{3,3,new int[3]{}};
-        vector v(3);
+        //vector<int> v{3,3,new int[3]{}};
+        vector<int> v(3);
         // pre
         //   A at 1 is not 12
         assert(v.data()[1] != 12);
@@ -866,8 +866,8 @@ void test_back() {
 
     // BACK OF CONST ARRAY
     {
-        //const vector constV{3,3,new int[3]{0,0,221}};
-        const vector v({0,0,221});
+        //const vector<int> constV{3,3,new int[3]{0,0,221}};
+        const vector<int> v({0,0,221});
         assert(v.back() == 221);
 
         //delete[] constv.data();
@@ -875,7 +875,7 @@ void test_back() {
 
     // BACK OF CONST NULL
     {
-        const vector constNull;
+        const vector<int> constNull;
         // pre
         //   object is const
         //   A is nullptr
@@ -896,8 +896,8 @@ void test_back() {
 
     // BACK OF CONST EMPTY
     {
-        //const vector constEmpty{1,0,new int[1]{}};
-        const vector v(0);
+        //const vector<int> constEmpty{1,0,new int[1]{}};
+        const vector<int> v(0);
         bool caught_expected_exception = false;
         try {
             v.back();
@@ -914,8 +914,8 @@ void test_back() {
 void test_at() {
     // ATTEMPT TO ACCESS NULL ARRAY
     {
-        //vector v{1, 1, nullptr};
-        vector v;
+        //vector<int> v{1, 1, nullptr};
+        vector<int> v;
         // pre
         //   A is nullptr
         assert(v.data() == nullptr);
@@ -936,8 +936,8 @@ void test_at() {
 
     // ATTEMPT TO ACCESS EMPTY ARRAY
     {
-        //vector v{5,0,new int[5]};
-        vector v;
+        //vector<int> v{5,0,new int[5]};
+        vector<int> v;
         v.reserve(5);
         // pre
         //   A is not null
@@ -964,8 +964,8 @@ void test_at() {
 
     // ACCESS MIDDLE OF ARRAY
     {
-        //vector v{10, 10, new int[10]{9,-1,-2,0,-4,3,7,5,6,8}};
-        vector v({9,-1,-2,0,-4,3,7,5,6,8});
+        //vector<int> v{10, 10, new int[10]{9,-1,-2,0,-4,3,7,5,6,8}};
+        vector<int> v({9,-1,-2,0,-4,3,7,5,6,8});
         // pre
         //   A[8] is 6
         //   A[7] is 5
@@ -994,8 +994,8 @@ void test_at() {
 
     // ATTEMPT TO ACCESS ARRAY OUT OF BOUNDS
     {
-        //vector v{10, 5, new int[10]{1,2,3,4,5}};
-        vector v({1,2,3,4,5});
+        //vector<int> v{10, 5, new int[10]{1,2,3,4,5}};
+        vector<int> v({1,2,3,4,5});
         v.reserve(10);
         // pre
         //   size is 5
@@ -1026,8 +1026,8 @@ void test_at() {
 
     // ATTEMPT TO ACCESS CONST ARRAY OUT OF BOUNDS
     {
-        //const vector v{10, 5, new int[10]{1,2,3,4,5}};
-        const vector v({1,2,3,4,5});
+        //const vector<int> v{10, 5, new int[10]{1,2,3,4,5}};
+        const vector<int> v({1,2,3,4,5});
         // pre
         //   size is 5
         assert(v.size() == 5);
@@ -1047,8 +1047,8 @@ void test_at() {
 
     // AT RETURNS LVALUE REFERENCE
     {
-        //vector v{10, 5, new int[10]{}};
-        vector v(5);
+        //vector<int> v{10, 5, new int[10]{}};
+        vector<int> v(5);
         v.reserve(10);
         // pre
         //   size > 3
@@ -1069,8 +1069,8 @@ void test_at() {
 
     // ACCESS CONST ARRAY
     {
-        //const vector constV{3, 2, new int[3]{0,121}};
-        const vector v({0,121,0});
+        //const vector<int> constV{3, 2, new int[3]{0,121}};
+        const vector<int> v({0,121,0});
         assert(v.at(1) == 121);
 
         //delete[] constv.data();
@@ -1078,7 +1078,7 @@ void test_at() {
 
     // ATTEMPT TO ACCESS CONST NULL ARRAY
     {
-        const vector constV;
+        const vector<int> constV;
         bool threw_expected_exception = false;
         try {
             constV.at(0);
@@ -1093,8 +1093,8 @@ void test_at() {
 
 void test_resize() {
     {
-        //vector v{10, 5, new int[10]{12,13,17,15,16}};
-        vector v({12,13,17,15,16});
+        //vector<int> v{10, 5, new int[10]{12,13,17,15,16}};
+        vector<int> v({12,13,17,15,16});
         v.reserve(10);
         // pre
         //   A is [12, 13, 17, 15, 16]
@@ -1135,7 +1135,7 @@ void test_pop_front() {
     /* OBSOLETE
     // REMOVE FROM NULL ARRAY
     {
-        vector v{1,1,nullptr};
+        vector<int> v{1,1,nullptr};
         // preconditions
         //   A is null
         //   capacity is > 0 (lie)
@@ -1167,8 +1167,8 @@ void test_pop_front() {
 
     // REMOVE THE FIRST ELEMENT
     {
-        //vector v{10, 10, new int[10]{1,2,3,4,5,6,7,8,9,10}};
-        vector v({1,2,3,4,5,6,7,8,9,10});
+        //vector<int> v{10, 10, new int[10]{1,2,3,4,5,6,7,8,9,10}};
+        vector<int> v({1,2,3,4,5,6,7,8,9,10});
         // preconditions
         //   capacity is > 1
         //   size is <= capacity and > 1
@@ -1196,8 +1196,8 @@ void test_pop_front() {
 
     // REMOVE ALL ELEMENTS FROM FRONT
     {
-        //vector v{9,9,new int[9]{1,2,3,4,5,6,7,8,9}};
-        vector v({1,2,3,4,5,6,7,8,9});
+        //vector<int> v{9,9,new int[9]{1,2,3,4,5,6,7,8,9}};
+        vector<int> v({1,2,3,4,5,6,7,8,9});
         size_t old_capacity = v.capacity();
         for (int i = 1; i < 10; i++) {
             // preconditions
@@ -1225,7 +1225,7 @@ void test_pop_front() {
 
     // ATTEMPT TO REMOVE FROM EMPTY NULL
     {
-        vector v;
+        vector<int> v;
         // preconditions
         //   size is 0
         //   capacity is 0
@@ -1254,8 +1254,8 @@ void test_pop_front() {
 
     // ATTEMPT TO REMOVE FROM EMPTY
     {
-        //vector v{5,0,new int[5]{1}};
-        vector v;
+        //vector<int> v{5,0,new int[5]{1}};
+        vector<int> v;
         v.reserve(5);
         // preconditions
         //   size is 0
@@ -1291,7 +1291,7 @@ void test_pop_front() {
 void test_erase_1() {
     // ERASE FROM NULL
     {
-        vector v;
+        vector<int> v;
         assert(v.capacity() == 0);
         assert(v.size() == 0);
         assert(v.data() == nullptr);
@@ -1309,8 +1309,8 @@ void test_erase_1() {
 
     // ERASE FROM EMPTY
     {
-        //vector v{10,0,new int[10]{}};
-        vector v;
+        //vector<int> v{10,0,new int[10]{}};
+        vector<int> v;
         v.reserve(10);
         assert(v.capacity() == 10);
         assert(v.size() == 0);
@@ -1330,8 +1330,8 @@ void test_erase_1() {
 
     // ERASE OUT OF BOUNDS
     {
-        //vector v{10,3,new int[10]{8,6,7}};
-        vector v({8,6,7});
+        //vector<int> v{10,3,new int[10]{8,6,7}};
+        vector<int> v({8,6,7});
         v.reserve(10);
         assert(v.capacity() == 10);
         assert(v.size() == 3);
@@ -1355,8 +1355,8 @@ void test_erase_1() {
     // ERASE 1 ELEMENT
     //   FRONT
     {
-        //vector v{10,3,new int[10]{8,6,7}};
-        vector v({8,6,7});
+        //vector<int> v{10,3,new int[10]{8,6,7}};
+        vector<int> v({8,6,7});
         v.reserve(10);
         assert(v.data()[0] == 8);
         assert(v.data()[1] == 6);
@@ -1379,8 +1379,8 @@ void test_erase_1() {
     }
     //   MIDDLE
     {
-        //vector v{10,3,new int[10]{8,6,7}};
-        vector v({8,6,7});
+        //vector<int> v{10,3,new int[10]{8,6,7}};
+        vector<int> v({8,6,7});
         v.reserve(10);
         assert(v.data()[1] == 6);
         assert(v.data()[2] == 7);
@@ -1403,8 +1403,8 @@ void test_erase_1() {
     }
     //   BACK
     {
-        //vector v{10,3,new int[10]{8,6,7}};
-        vector v({8,6,7});
+        //vector<int> v{10,3,new int[10]{8,6,7}};
+        vector<int> v({8,6,7});
         v.reserve(10);
         assert(v.data()[2] == 7);
         assert(v.capacity() == 10);
@@ -1429,7 +1429,7 @@ void test_erase_1() {
 void test_erase_range() {
     // ERASE FROM NULL
     {
-        vector v;
+        vector<int> v;
         bool threw_exception = false;
         try {
             v.erase(0,1);
@@ -1441,7 +1441,7 @@ void test_erase_range() {
 
     // ERASE FROM EMPTY
     {
-        vector v;
+        vector<int> v;
         v.reserve(10);
         bool threw_exception = false;
         try {
@@ -1454,7 +1454,7 @@ void test_erase_range() {
 
     // ERASE OUT OF BOUNDS
     {
-        vector v({1,2,3,4,5});
+        vector<int> v({1,2,3,4,5});
         bool threw_exception = false;
         try {
             v.erase(3,6);
@@ -1472,7 +1472,7 @@ void test_erase_range() {
     // ERASE RANGE OF ELEMENTS
     //   1 ELEMENT
     {
-        vector v({1,2,3,4,5});
+        vector<int> v({1,2,3,4,5});
         bool threw_exception = false;
         try {
             v.erase(3,4);
@@ -1489,7 +1489,7 @@ void test_erase_range() {
     }
     //   FRONT
     {
-        vector v({1,2,3,4,5});
+        vector<int> v({1,2,3,4,5});
         bool threw_exception = false;
         try {
             v.erase(0,2);
@@ -1505,7 +1505,7 @@ void test_erase_range() {
     }
     //   MIDDLE
     {
-        vector v({1,2,3,4,5});
+        vector<int> v({1,2,3,4,5});
         bool threw_exception = false;
         try {
             v.erase(2,4);
@@ -1521,7 +1521,7 @@ void test_erase_range() {
     }
     //   BACK
     {
-        vector v({1,2,3,4,5});
+        vector<int> v({1,2,3,4,5});
         bool threw_exception = false;
         try {
             v.erase(3,5);
@@ -1537,7 +1537,7 @@ void test_erase_range() {
     }
     //   WHOLE THING
     {
-        vector v({1,2,3,4,5});
+        vector<int> v({1,2,3,4,5});
         bool threw_exception = false;
         try {
             v.erase(0,5);
@@ -1550,13 +1550,14 @@ void test_erase_range() {
     }
 }
 
+// integration test
 void test_rule_of_three() {
     // destructor
     // copy constructor
     // copy assignment
 
-    // make a vector
-    vector v;
+    // make a vector<int>
+    vector<int> v;
     v.push_back(1);
     v.push_back(2);
     v.push_back(3);
@@ -1564,16 +1565,24 @@ void test_rule_of_three() {
     size_t original_capacity = v.capacity();
     {
         // copy it
-        vector copy = v;
+        vector<int> copy = v;
 
         // verify copy correctly
         assert(v.size() == original_size);
         assert(v.capacity() == original_capacity);
         assert(copy.size() == v.size());
         assert(copy.capacity() == v.capacity());
+        /*
         for (size_t i = 0; i < v.size(); i++) {
             assert(copy.at(i) == int(i+1));
             assert(copy.at(i) == int(v.at(i)));
+        }
+        */
+        size_t i = 0;
+        for (int n : copy) {
+            assert(n == int(i+1));
+            assert(n == int(v.at(i)));
+            i++;
         }
 
         // verify deep copy
@@ -1626,6 +1635,88 @@ void test_rule_of_three() {
     assert(v.back() == 7);
 }
 
+void demo_integration_testing() {
+    vector<int> v;
+    for (int n = 0; n < 10; n++) {
+        assert(v.size() == size_t(n));
+        v.push_back(n);
+        assert(v.size() == size_t(n+1));
+    }
+    // [0,1,2,3,4,5,6,7,8,9]
+
+    assert(v.pop_front() == 0);
+    assert(v.pop_back() == 9);
+    assert(v.size() == 8);
+    // [1,2,3,4,5,6,7,8]
+
+    v.erase(2,5);
+    // [1,2,6,7,8]
+    assert(v.size() == 5);
+    assert(v.at(0) == 1);
+    assert(v.at(1) == 2);
+    assert(v.at(2) == 6);
+    assert(v.at(3) == 7);
+    assert(v.at(4) == 8);
+
+    assert(v.pop_front() == 1);
+    assert(v.pop_back() == 8);
+    assert(v.size() == 3);
+    // [2,6,7]
+
+    assert(v.front() == 2);
+    assert(v.at(1) == 6);
+    assert(v.back() == 7);
+}
+
+void demo_iterator() {
+    vector<int> v({0,1,1,3,5,8,13,21});
+
+    for (size_t index = 0; index < v.size(); index++) {
+        cout << v.at(index) << " ";
+    }
+    cout << endl;
+
+    for (vector<int>::iterator iter = v.begin(); iter != v.end(); ++iter) {
+        cout << *iter << " ";
+    }
+    cout << endl;
+
+    for (int n : v) {
+        cout << n << " ";
+    }
+    cout << endl;
+}
+
+void demo_template() {
+    {
+        vector<std::string> v({
+            "thanks",
+            "and",
+            "gig",
+            "'em!",
+            "BTHO",
+            "auburn"
+        });
+        for (std::string s : v) {
+            cout << s << " ";
+        }
+        cout << endl;
+    }
+
+    {
+        vector<double> v;
+        double d = 13;
+        while (d > 1e-3) {
+            v.push_front(d);
+            d /= 2;
+        }
+        for (double d : v) {
+            cout << d << " ";
+        }
+        cout << endl;
+    }
+}
+
 int main() {
 
     test_construct();
@@ -1642,83 +1733,11 @@ int main() {
     test_resize();
     test_rule_of_three();
 
+    demo_integration_testing();
+    demo_iterator();
+    demo_template();
+
     cout << "ALL TESTS PASSING" << endl;
 
     return 0;
 } 
-
-/*
-void test_rule_of_three() {
-    // destructor
-    // copy constructor
-    // copy assignment
-
-    // make a vector
-    vector v;
-    v.push_back(1);
-    v.push_back(2);
-    v.push_back(3);
-    size_t original_size = v.size();
-    size_t original_capacity = v.capacity();
-    {
-        // copy it
-        vector copy = v;
-
-        // verify copy correctly
-        assert(v.size() == original_size);
-        assert(v.capacity() == original_capacity);
-        assert(copy.size == v.size());
-        assert(copy.capacity == v.capacity());
-        for (size_t i = 0; i < v.size(); i++) {
-            assert(copy.at(i) == int(i+1));
-            assert(v.at(i) == int(i+1));
-            assert(copy.at(i) == int(v.at(i)));
-        }
-
-        // verify deep copy
-        copy.push_back(4);
-        v.push_back(5);
-        assert(v.back() == 5);
-        assert(copy.back() == 4);
-
-        // copy assignment
-        copy.pop_back();
-        v = copy;
-
-        // verify copy correctly
-        assert(v.size() == original_size);
-        assert(v.capacity() == original_capacity);
-        assert(copy.size == original_size);
-        assert(copy.capacity == original_capacity);
-        for (size_t i = 0; i < original_size; i++) {
-            assert(v.at(i) == int(i+1));
-            assert(copy.at(i) == int(i+1));  
-            assert(v.at(i) == int(v.at(i)));
-        }
-
-        // verify deep copy
-        copy.push_back(4);
-        v.push_back(5);
-        assert(v.back() == 5);
-        assert(copy.back() == 4);
-
-        // destruct copy
-    }
-
-    // verify that v is still OK
-    assert(v.size() == original_size+1);
-    assert(v.capacity() == original_capacity);
-    for (size_t i = 0; i < original_size; i++) {
-        assert(v.at(i) == int(i+1));
-    }
-    assert(v.back() == 5);
-
-    v = v;
-    assert(v.size() == original_size+1);
-    assert(v.capacity() == original_capacity);
-    for (size_t i = 0; i < original_size; i++) {
-        assert(v.at(i) == int(i+1));
-    }
-    assert(v.back() == 5);
-}
-*/

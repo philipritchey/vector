@@ -9,17 +9,17 @@ CXXFLAGS = $(STD) $(WARNINGS) $(ERRORS) $(DEBUGGING)
 
 default: build
 
-build: main.cpp vector.cpp
-	$(CXX) $(CXXFLAGS) main.cpp vector.cpp
+build: main.cpp vector.hpp
+	$(CXX) $(CXXFLAGS) main.cpp
 
-test: main.cpp vector.cpp
-	$(CXX) $(CXXFLAGS) main.cpp vector.cpp && ./a.out
+test: main.cpp vector.hpp
+	$(CXX) $(CXXFLAGS) main.cpp && ./a.out
 
-coverage: clean main.cpp vector.cpp
-	$(CXX) $(STD) $(DEBUGGING) $(COVERAGE) main.cpp vector.cpp && ./a.out && gcov -mr vector.cpp
+coverage: clean main.cpp vector.hpp
+	$(CXX) $(STD) $(DEBUGGING) $(COVERAGE) main.cpp && ./a.out && gcov -mr main.cpp
 
-memoryerrortest: main.cpp vector.cpp
-	$(CXX) $(STD) $(DEBUGGING) $(SANITIZERS) main.cpp vector.cpp && ./a.out
+memoryerrortest: main.cpp vector.hpp
+	$(CXX) $(STD) $(DEBUGGING) $(SANITIZERS) main.cpp && ./a.out
 
 .PHONY: clean
 

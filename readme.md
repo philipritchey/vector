@@ -20,7 +20,7 @@ make test
 make coverage
 
 # to build and check for memory errors
-make leaktest
+make memoryerrortest
 
 # to clean up (remove executable, coverage files)
 make clean
@@ -35,5 +35,4 @@ make clean
 * `Makefile`: build instructions for make
 * `readme.md`: this file
 * `todo.md`: todo list 
-* `vector.cpp`: definitions of vector methods
-* `vector.hpp`: declaration of vector struct and methods
+* `vector.hpp`: declaration of vector class and methods
