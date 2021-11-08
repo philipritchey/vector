@@ -10,6 +10,27 @@ class vector {
     size_t the_size;
     T* A;
 
+    void copy(const vector& other) {
+        // deep copy other and prevent memory leaks
+        if (A) {
+            clear();
+        }
+        the_size = other.the_size;
+        the_capacity = other.the_capacity;
+        A = new T[the_capacity];
+        for (size_t index = 0; index < the_size; index++) {
+            A[index] = other.A[index];
+        }
+    }
+
+    void clear() {
+        // return to "pristine" empty vector
+        delete[] A;
+        A = nullptr;
+        the_capacity = 0;
+        the_size = 0;
+    }
+
  public:
     typedef T* iterator;
 
@@ -28,25 +49,20 @@ class vector {
         }
     }
 
-    vector(const vector& other) : the_capacity{other.the_capacity}, the_size{other.the_size}, A{new T[the_capacity]{}} {
-        for (size_t index = 0; index < the_size; index++) {
-            A[index] = other.A[index];
-        }
+    // copy constructor
+    vector(const vector& other) : vector() {
+        copy(other);
     }
 
+    // destructor
     ~vector() {
-        delete[] A;
+        clear();
     }
 
+    // copy assignment operator
     vector& operator=(const vector& rhs) {
         if (this != &rhs) {
-            the_size = rhs.the_size;
-            the_capacity = rhs.the_capacity;
-            delete[] A;
-            A = new T[the_capacity];
-            for (size_t index = 0; index < the_size; index++) {
-                A[index] = rhs.A[index];
-            }
+            copy(rhs);
         }
         return *this;
     }
